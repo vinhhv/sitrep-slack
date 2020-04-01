@@ -13,8 +13,8 @@ object Dependencies {
 
   val logging = "com.typesafe.scala-logging" %% "scala-logging" % Version.logging
 
-  val bolt      = "com.slack.api" %% "bolt" % Version.slack
-  val boltJetty = "com.slack.api" %% "bolt-jetty" % Version.slack
+  val bolt      = "com.slack.api" % "bolt" % Version.slack
+  val boltJetty = "com.slack.api" % "bolt-jetty" % Version.slack
   val slack     = List(bolt, boltJetty)
 
   val zio        = "dev.zio" %% "zio" % Version.zio

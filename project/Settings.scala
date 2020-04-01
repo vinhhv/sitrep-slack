@@ -6,7 +6,7 @@ import sbt.util.Level
 import wartremover._
 
 object Settings {
-  val warts = Warts.allBut(Wart.Nothing)
+  val warts = Warts.allBut(Wart.Any, Wart.Nothing)
 
   // see https://docs.scala-lang.org/overviews/compiler-options/index.html#Standard_Settings
   private val stdOptions = Seq(
@@ -51,8 +51,8 @@ object Settings {
   }
 
   val storageDependencies = List(quill, zio, zioCats)
-  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe ++ slack
-  val backendDependencies = List(flyway, zioConfig)
+  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe
+  val backendDependencies = List(flyway, zioConfig) ++ slack
 
   val higherKinds = addCompilerPlugin("org.typelevel" %% "kind-projector" % Version.kindProjector)
 }
