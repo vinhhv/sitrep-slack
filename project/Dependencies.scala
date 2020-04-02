@@ -11,6 +11,11 @@ object Dependencies {
   val circeParser  = "io.circe" %% "circe-parser" % Version.circe
   val circe        = List(circeGeneric, circeCore, circeParser, circeExtras)
 
+  val http4sBlaze = "org.http4s" %% "http4s-blaze-server" % Version.http4s
+  val http4sCirce = "org.http4s" %% "http4s-circe" % Version.http4s
+  val http4sDsl   = "org.http4s" %% "http4s-dsl" % Version.http4s
+  val http4s      = List(http4sBlaze, http4sCirce, http4sDsl)
+
   val logging = "com.typesafe.scala-logging" %% "scala-logging" % Version.logging
 
   val bolt      = "com.slack.api" % "bolt" % Version.slack
@@ -32,6 +37,7 @@ object Version {
   val circe       = "0.13.0"
   val circeExtras = "0.12.2"
 
+  val http4s        = "0.21.2"
   val kindProjector = "0.10.3"
   val logging       = "3.9.2"
 

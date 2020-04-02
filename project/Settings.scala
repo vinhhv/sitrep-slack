@@ -23,16 +23,16 @@ object Settings {
     , "-opt:l:inline"
     , "-opt-inline-from:<source>"
     , "-unchecked"
+    , "-Xcheckinit"
+    , "-Xfatal-warnings"
+    , "-Xlint"
+    , "-Xlint:inaccessible"
     , "-Ymacro-annotations"
     , "-Ywarn-extra-implicit"
     , "-Ywarn-numeric-widen"
     , "-Ywarn-self-implicit"
     , "-Ywarn-unused"
     , "-Ywarn-value-discard"
-    , "-Xcheckinit"
-    , "-Xfatal-warnings"
-    , "-Xlint"
-    , "-Xlint:inaccessible"
   )
   val commonSettings = {
     Seq(
@@ -52,7 +52,7 @@ object Settings {
 
   val storageDependencies = List(quill, zio, zioCats)
   val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe
-  val backendDependencies = List(flyway, zioConfig) ++ slack
+  val backendDependencies = List(flyway, zioConfig) ++ http4s ++ slack
 
   val higherKinds = addCompilerPlugin("org.typelevel" %% "kind-projector" % Version.kindProjector)
 }
