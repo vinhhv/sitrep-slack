@@ -22,11 +22,16 @@ object Dependencies {
   val boltJetty = "com.slack.api" % "bolt-jetty" % Version.slack
   val slack     = List(bolt, boltJetty)
 
-  val zio        = "dev.zio" %% "zio" % Version.zio
-  val zioCats    = ("dev.zio" %% "zio-interop-cats" % Version.zioCats).excludeAll(ExclusionRule("dev.zio"))
-  val zioConfig  = "dev.zio" %% "zio-config" % Version.zioConfig
-  val zioMacros  = "dev.zio" %% "zio-macros" % Version.zio
-  val zioTest    = "dev.zio" %% "zio-test" % Version.zio % "test"
+  val zio     = "dev.zio" %% "zio" % Version.zio
+  val zioCats = ("dev.zio" %% "zio-interop-cats" % Version.zioCats).excludeAll(ExclusionRule("dev.zio"))
+
+  val zioConfigCore     = "dev.zio" %% "zio-config" % Version.zioConfig
+  val zioConfigMagnolia = "dev.zio" %% "zio-config-magnolia" % Version.zioConfig
+  val zioConfigTypesafe = "dev.zio" %% "zio-config-typesafe" % Version.zioConfig
+  val zioConfig         = List(zioConfigCore, zioConfigMagnolia, zioConfigTypesafe)
+
+  val zioMacros  = "dev.zio" %% "zio-macros"   % Version.zio
+  val zioTest    = "dev.zio" %% "zio-test"     % Version.zio % "test"
   val zioTestSbt = "dev.zio" %% "zio-test-sbt" % Version.zio % "test"
 }
 
