@@ -1,14 +1,12 @@
 package vinhhv.io.config
 
 import com.typesafe.config.ConfigFactory
-import vinhhv.io.config.Config.SitrepConfig
-import zio.{ Layer, config }
+import zio.{ Has, Layer, config }
 import zio.config.magnolia.ConfigDescriptorProvider
 import zio.config.typesafe.TypesafeConfig
 
-final case class Config(sitrep: SitrepConfig)
-
 object Config {
+  final case class BaseConfig(sitrep: SitrepConfig)
   final case class SitrepConfig(slackAppConfig: SlackAppConfig)
   final case class SlackAppConfig(
         path: String
@@ -18,7 +16,9 @@ object Config {
       , clientSecret: String
       , signingSecret: String
   )
-  def loadConfig: Layer[Throwable, config.Config[SitrepConfig]] =
+
+  def live: Layer[Throwable, Has[config.Config[SitrepConfig]]] =
     TypesafeConfig
       .fromHocon(ConfigFactory.load(), ConfigDescriptorProvider[SitrepConfig].getDescription("application.conf"))
+      .map(Has(_))
 }
