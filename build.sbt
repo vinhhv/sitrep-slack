@@ -15,6 +15,7 @@ lazy val service = project
 lazy val storage = project
   .settings(commonSettings)
   .settings(libraryDependencies ++= storageDependencies)
+  .dependsOn(domain)
 
 lazy val domain = project
   .settings(commonSettings)

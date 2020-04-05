@@ -1,7 +1,6 @@
 package vinhhv.io
 
-import vinhhv.io.config.Config
-import vinhhv.io.app.SlackApp
+import vinhhv.io.app.{ AppConfig, SlackApp }
 import vinhhv.io.app.SlackApp.SlackApp
 import zio.clock.Clock
 import zio.{ console => ZConsole, _ }
@@ -15,7 +14,7 @@ object Main extends zio.App {
       _ <- SlackApp.start
     } yield ()
 
-    val slack    = Config.live >>> SlackApp.live
+    val slack    = AppConfig.live >>> SlackApp.live
     val appLayer = ZConsole.Console.live ++ slack
     program
       .provideSomeLayer[ZEnv](appLayer)

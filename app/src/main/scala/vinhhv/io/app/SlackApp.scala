@@ -1,7 +1,6 @@
 package vinhhv.io.app
 
-import vinhhv.io.config.Config.SitrepConfig
-import zio.config.Config
+import vinhhv.io.app.AppConfig.AppConfig
 import zio.macros.accessible
 import zio.{ Has, Task, URLayer, ZLayer }
 
@@ -13,6 +12,6 @@ object SlackApp {
     def start: Task[Unit]
   }
 
-  def live: URLayer[Has[Config[SitrepConfig]], Has[Service]] =
+  def live: URLayer[AppConfig, SlackApp] =
     ZLayer.fromService(config => Live(config))
 }
