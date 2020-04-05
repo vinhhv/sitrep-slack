@@ -12,12 +12,11 @@ private[slack] final case class Live(sitrepConfig: Config[SitrepConfig]) extends
   val appConfig: AppConfig =
     AppConfig
       .builder()
-      .clientId(config.clientId)
-      .clientSecret(config.clientSecret)
+      .singleTeamBotToken(config.botToken)
       .signingSecret(config.signingSecret)
       .build()
   val handler: SlashCommandHandler = (_, ctx) => ctx.ack(":wave: Hello!")
-  val slackApp: App                = new App(appConfig).command(config.slashCommand, handler)
+  val slackApp: App                = new App().command(config.slashCommand, handler)
 
   def start: Task[Unit] =
     ZIO.effect(new SlackAppServer(slackApp, config.path, config.port).start())

@@ -45,8 +45,8 @@ object Settings {
       , wartremoverErrors in (Test, compile) ++= warts
       , testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework"))
       , cancelable in Global := true
-      , fork in Global := true, // https://github.com/sbt/sbt/issues/2274
-      resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+      // , fork in Global := true, // https://github.com/sbt/sbt/issues/2274
+      , resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
     )
   }
 

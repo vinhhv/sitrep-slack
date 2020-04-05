@@ -14,6 +14,7 @@ object Config {
         path: String
       , port: Int
       , slashCommand: String
+      , botToken: String
       , clientId: String
       , clientSecret: String
       , signingSecret: String
