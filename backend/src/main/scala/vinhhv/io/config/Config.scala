@@ -21,6 +21,6 @@ object Config {
 
   def live: Layer[Throwable, Has[config.Config[SitrepConfig]]] =
     TypesafeConfig
-      .fromHocon(ConfigFactory.load(), ConfigDescriptorProvider[SitrepConfig].getDescription("application.conf"))
+      .fromHocon(ConfigFactory.load(), ConfigDescriptorProvider[SitrepConfig].getDescription("sitrep"))
       .map(Has(_))
 }
