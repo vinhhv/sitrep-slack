@@ -25,9 +25,10 @@ lazy val `sitrep-slack` = Project("sitrep-slack", file("."))
   .settings(organization := "vinhhv.io")
   .settings(moduleName := "sitrep-slack")
   .settings(name := "sitrep-slack")
+  .settings(mainClass in (Compile, run) := Some("vinhhv.io.Main"))
   .aggregate(
       domain
     , storage
     , service
-    , backend
   )
+  .dependsOn(backend)

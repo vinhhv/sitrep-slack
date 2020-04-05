@@ -9,7 +9,7 @@ import zio.console.Console
 
 object Main extends zio.App {
   type AppEnv = Clock with Console with SlackApp
-  override def run(args: List[String]): ZIO[zio.ZEnv, Nothing, Int] = {
+  override def run(args: List[String]): ZIO[ZEnv, Nothing, Int] = {
     val program: ZIO[AppEnv, Throwable, Unit] = for {
       _ <- ZConsole.putStrLn("Hello world!")
       _ <- SlackApp.start
