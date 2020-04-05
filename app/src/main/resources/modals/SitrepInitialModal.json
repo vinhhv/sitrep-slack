@@ -1,0 +1,231 @@
+[
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "A message *with some bold text* and _some italicized text_."
+    },
+    "block_id": "text1"
+  },
+  {
+    "type": "input",
+    "element": {
+      "type": "plain_text_input"
+    },
+    "label": {
+      "type": "plain_text",
+      "text": "Label",
+      "emoji": true
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick a date for the deadline."
+    },
+    "accessory": {
+      "type": "datepicker",
+      "initial_date": "1990-04-28",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select a date",
+        "emoji": true
+      }
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick an item from the dropdown list"
+    },
+    "accessory": {
+      "type": "static_select",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select an item",
+        "emoji": true
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 1",
+            "emoji": true
+          },
+          "value": "value-0"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 2",
+            "emoji": true
+          },
+          "value": "value-1"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 3",
+            "emoji": true
+          },
+          "value": "value-2"
+        }
+      ]
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick an item from the dropdown list"
+    },
+    "accessory": {
+      "type": "static_select",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select an item",
+        "emoji": true
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 1",
+            "emoji": true
+          },
+          "value": "value-0"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 2",
+            "emoji": true
+          },
+          "value": "value-1"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 3",
+            "emoji": true
+          },
+          "value": "value-2"
+        }
+      ]
+    }
+  },
+  {
+    "type": "divider"
+  },
+  {
+    "type": "input",
+    "element": {
+      "type": "plain_text_input"
+    },
+    "label": {
+      "type": "plain_text",
+      "text": "Label",
+      "emoji": true
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick a date for the deadline."
+    },
+    "accessory": {
+      "type": "datepicker",
+      "initial_date": "1990-04-28",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select a date",
+        "emoji": true
+      }
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick an item from the dropdown list"
+    },
+    "accessory": {
+      "type": "static_select",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select an item",
+        "emoji": true
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 1",
+            "emoji": true
+          },
+          "value": "value-0"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 2",
+            "emoji": true
+          },
+          "value": "value-1"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 3",
+            "emoji": true
+          },
+          "value": "value-2"
+        }
+      ]
+    }
+  },
+  {
+    "type": "section",
+    "text": {
+      "type": "mrkdwn",
+      "text": "Pick an item from the dropdown list"
+    },
+    "accessory": {
+      "type": "static_select",
+      "placeholder": {
+        "type": "plain_text",
+        "text": "Select an item",
+        "emoji": true
+      },
+      "options": [
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 1",
+            "emoji": true
+          },
+          "value": "value-0"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 2",
+            "emoji": true
+          },
+          "value": "value-1"
+        },
+        {
+          "text": {
+            "type": "plain_text",
+            "text": "Choice 3",
+            "emoji": true
+          },
+          "value": "value-2"
+        }
+      ]
+    }
+  }
+]

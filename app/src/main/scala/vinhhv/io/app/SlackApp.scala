@@ -1,4 +1,4 @@
-package vinhhv.io.slack
+package vinhhv.io.app
 
 import vinhhv.io.config.Config.SitrepConfig
 import zio.config.Config

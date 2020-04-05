@@ -1,4 +1,4 @@
-package vinhhv.io.slack
+package vinhhv.io.app
 
 import com.slack.api.bolt.handler.builtin.SlashCommandHandler
 import com.slack.api.bolt.jetty.SlackAppServer
@@ -7,7 +7,7 @@ import vinhhv.io.config.Config.SitrepConfig
 import zio.{ Task, ZIO }
 import zio.config.Config
 
-private[slack] final case class Live(sitrepConfig: Config[SitrepConfig]) extends SlackApp.Service {
+private[app] final case class Live(sitrepConfig: Config[SitrepConfig]) extends SlackApp.Service {
   val config = sitrepConfig.get.config.slackAppConfig
   val appConfig: AppConfig =
     AppConfig

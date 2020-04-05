@@ -1,8 +1,8 @@
 package vinhhv.io
 
 import vinhhv.io.config.Config
-import vinhhv.io.slack.SlackApp
-import vinhhv.io.slack.SlackApp.SlackApp
+import vinhhv.io.app.SlackApp
+import vinhhv.io.app.SlackApp.SlackApp
 import zio.clock.Clock
 import zio.{ console => ZConsole, _ }
 import zio.console.Console

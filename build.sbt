@@ -1,13 +1,10 @@
 import sbt._
 import Settings._
 
-lazy val domain = project
+lazy val app = project
   .settings(commonSettings)
-
-lazy val storage = project
-  .settings(commonSettings)
-  .settings(libraryDependencies ++= storageDependencies)
-  .dependsOn(domain)
+  .settings(libraryDependencies ++= appDependencies)
+  .dependsOn(service)
 
 lazy val service = project
   .settings(commonSettings)
@@ -15,10 +12,12 @@ lazy val service = project
   .settings(higherKinds)
   .dependsOn(storage)
 
-lazy val backend = project
+lazy val storage = project
   .settings(commonSettings)
-  .settings(libraryDependencies ++= backendDependencies)
-  .dependsOn(service)
+  .settings(libraryDependencies ++= storageDependencies)
+
+lazy val domain = project
+  .settings(commonSettings)
 
 lazy val `sitrep-slack` = Project("sitrep-slack", file("."))
   .settings(commonSettings)
@@ -31,4 +30,4 @@ lazy val `sitrep-slack` = Project("sitrep-slack", file("."))
     , storage
     , service
   )
-  .dependsOn(backend)
+  .dependsOn(app)
