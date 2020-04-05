@@ -6,6 +6,8 @@ import zio.config.magnolia.ConfigDescriptorProvider
 import zio.config.typesafe.TypesafeConfig
 
 object Config {
+  type Config = Has[config.Config[SitrepConfig]]
+
   final case class BaseConfig(sitrep: SitrepConfig)
   final case class SitrepConfig(slackAppConfig: SlackAppConfig)
   final case class SlackAppConfig(

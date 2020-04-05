@@ -6,7 +6,7 @@ import sbt.util.Level
 import wartremover._
 
 object Settings {
-  val warts = Warts.allBut(Wart.Any, Wart.Nothing)
+  val warts = Warts.allBut(Wart.Any, Wart.Nothing, Wart.PublicInference)
 
   // see https://docs.scala-lang.org/overviews/compiler-options/index.html#Standard_Settings
   private val stdOptions = Seq(
