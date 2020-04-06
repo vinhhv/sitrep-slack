@@ -51,7 +51,7 @@ object Settings {
   }
 
   val appDependencies     = List(flyway) ++ http4s ++ slack ++ zioConfig
-  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe
+  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe ++ slack
   val storageDependencies = List(quill, zio, zioCats)
 
   val higherKinds = addCompilerPlugin("org.typelevel" %% "kind-projector" % Version.kindProjector)

@@ -18,9 +18,10 @@ object Dependencies {
 
   val logging = "com.typesafe.scala-logging" %% "scala-logging" % Version.logging
 
-  val bolt      = "com.slack.api" % "bolt" % Version.slack
-  val boltJetty = "com.slack.api" % "bolt-jetty" % Version.slack
-  val slack     = List(bolt, boltJetty)
+  val bolt        = "com.slack.api" % "bolt" % Version.slack
+  val boltJetty   = "com.slack.api" % "bolt-jetty" % Version.slack
+  val slackClient = "com.slack.api" % "slack-api-client" % Version.slack
+  val slack       = List(bolt, boltJetty, slackClient)
 
   val zio     = "dev.zio" %% "zio" % Version.zio
   val zioCats = ("dev.zio" %% "zio-interop-cats" % Version.zioCats).excludeAll(ExclusionRule("dev.zio"))

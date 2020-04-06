@@ -1,7 +1,7 @@
 package vinhhv.io
 
 object Config {
-  final case class SitrepConfig(slackAppConfig: SlackAppConfig)
+  final case class SitrepConfig(slackAppConfig: SlackAppConfig, slackClientConfig: SlackClientConfig)
   final case class SlackAppConfig(
         path: String
       , port: Int
@@ -11,4 +11,5 @@ object Config {
       , clientSecret: String
       , signingSecret: String
   )
+  final case class SlackClientConfig(userToken: String)
 }
