@@ -24,9 +24,8 @@ object Main extends zio.App {
   }
 
   def createAppLayer: ZLayer[Any, Throwable, Console with SlackApp] = {
-    // TODO: remove redundancy
-    val client = AppConfig.live >>> SlackMethodsClient.live
-    val server = AppConfig.live ++ client >>> SlackApp.live
+    val client = AppConfig.live >>> SlackMethodsClient.live.passthrough
+    val server = client >>> SlackApp.live
     ZConsole.Console.live ++ server
   }
 }
