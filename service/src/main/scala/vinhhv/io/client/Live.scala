@@ -6,7 +6,7 @@ import vinhhv.io.Config.SitrepConfig
 import zio.Task
 
 private[client] final case class Live(sitrepConfig: SitrepConfig) extends SlackMethodsClient.Service {
-  val methodsClient: MethodsClient = Slack.getInstance().methods(sitrepConfig.slackClientConfig.userToken)
+  val methodsClient: MethodsClient = Slack.getInstance().methods(sitrepConfig.slackAppConfig.userToken)
 
   def setStatus(text: String, emoji: String): Task[Unit] = ???
 }
