@@ -2,6 +2,7 @@ package vinhhv.io
 
 import vinhhv.io.app.{ AppConfig, SlackApp }
 import vinhhv.io.app.SlackApp.SlackApp
+import vinhhv.io.client.SlackMethodsClient
 import zio.clock.Clock
 import zio.{ console => ZConsole, _ }
 import zio.console.Console
@@ -14,13 +15,18 @@ object Main extends zio.App {
       _ <- SlackApp.start
     } yield ()
 
-    val slack    = AppConfig.live >>> SlackApp.live
-    val appLayer = ZConsole.Console.live ++ slack
     program
-      .provideSomeLayer[ZEnv](appLayer)
+      .provideSomeLayer[ZEnv](createAppLayer)
       .foldM(
           err => ZConsole.putStrLn(s"Oops! ${err.getMessage}") *> ZIO.succeed(1)
         , _ => ZIO.succeed(0)
       )
+  }
+
+  def createAppLayer: ZLayer[Any, Throwable, Console with SlackApp] = {
+    // TODO: remove redundancy
+    val client = AppConfig.live >>> SlackMethodsClient.live
+    val server = AppConfig.live ++ client >>> SlackApp.live
+    ZConsole.Console.live ++ server
   }
 }
