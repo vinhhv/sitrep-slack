@@ -19,7 +19,7 @@ private[app] final case class Live(
       .signingSecret(config.signingSecret)
       .build()
   val handler: SlashCommandHandler = (_, ctx) => ctx.ack(":wave: Hello!")
-  val slackApp: App                = new App().command(config.slashCommand, handler)
+  val slackApp: App                = new App(appConfig).command(config.slashCommand, handler)
 
   def start: Task[Unit] =
     ZIO.effect(new SlackAppServer(slackApp, config.path, config.port).start())
