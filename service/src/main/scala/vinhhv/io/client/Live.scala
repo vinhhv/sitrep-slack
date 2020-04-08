@@ -19,7 +19,7 @@ private[client] final case class Live(methodsClient: MethodsClient) extends Slac
        |Warning: $warning
        |""".stripMargin
 
-  def setStatus(text: String, emoji: String): Task[Response] = {
+  def setStatus(emoji: String, text: String): Task[Response] = {
     val profile = new User.Profile()
     profile.setStatusEmoji(emoji)
     profile.setStatusText(text)

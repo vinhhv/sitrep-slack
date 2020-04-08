@@ -11,7 +11,7 @@ object SlackMethodsClient {
   type SlackMethodsClient = Has[Service]
 
   trait Service {
-    def setStatus(text: String, emoji: String): Task[Response]
+    def setStatus(emoji: String, status: String): Task[Response]
   }
 
   def live: URLayer[Has[SitrepConfig], SlackMethodsClient] =
