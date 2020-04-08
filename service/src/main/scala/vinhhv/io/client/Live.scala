@@ -38,7 +38,8 @@ private[client] final case class Live(methodsClient: MethodsClient) extends Slac
           Response.json(statusCodeSuccess, SlashCommandResponse.builder.text(text).build)
         } else {
           val text = textFailure(setResponse.getError, setResponse.getWarning)
-          Response.json(statusCodeFailure, SlashCommandResponse.builder.text(text).build)
+          // Status has to be success otherwise ngrok returns client error
+          Response.json(statusCodeSuccess, SlashCommandResponse.builder.text(text).build)
         }
       }
   }
