@@ -16,6 +16,8 @@ object SlackMethodsClient {
 
   def live: URLayer[Has[SitrepConfig], SlackMethodsClient] =
     ZLayer.fromService[SitrepConfig, Service] { config =>
-      Live(Slack.getInstance.methods(config.slackAppConfig.userToken))
+      val userToken     = config.slackAppConfig.userToken
+      val methodsClient = Slack.getInstance.methods(userToken)
+      Live(methodsClient, userToken)
     }
 }
