@@ -72,12 +72,9 @@ private[client] final case class Live(
 
     ZIO
       .effect(methodsClient.usersProfileSet(request))
-      .map { response: UsersProfileSetResponse =>
-        if (response.isOk) {
-          createResponse(textSuccess)
-        } else {
-          createResponse(textFailure(response.getError, response.getWarning))
-        }
+      .flatMap { response: UsersProfileSetResponse =>
+        if (response.isOk) ZIO.succeed(createResponse(textSuccess))
+        else ZIO.fail(SlackClientException(textFailure(response.getError, response.getWarning)))
       }
   }
 
@@ -85,8 +82,8 @@ private[client] final case class Live(
     for {
       emojiStripped <- verifyFormattedEmoji(emoji)
       emojiListResp <- retrieveEmojis
-      handler       <- handleResponse(emojiListResp, verifyEmojiExists(emojiStripped))
-      _             <- handler
+      handleVerify  <- handleResponse(emojiListResp, verifyEmojiExists(emojiStripped))
+      _             <- handleVerify
       response      <- setStatusM(emoji, text)
     } yield response
 }
