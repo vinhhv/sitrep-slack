@@ -43,8 +43,8 @@ private[app] final case class Live(
 
 private object Live {
   def parse(text: String): (String, String) =
-    text.split(" ").toList match {
+    text.trim.split(" ", 2).toList match {
       case emoji :: status :: _ => (emoji, status)
-      case _                    => (":middle_finger", "This is the default status")
+      case _                    => (":middle_finger:", "This is the default status")
     }
 }

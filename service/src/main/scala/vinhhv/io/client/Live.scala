@@ -1,9 +1,8 @@
 package vinhhv.io.client
 
-import cats.syntax.either._
 import com.slack.api.app_backend.slash_commands.response.SlashCommandResponse
 import com.slack.api.bolt.response.Response
-import com.slack.api.methods.{ MethodsClient, SlackApiResponse }
+import com.slack.api.methods.MethodsClient
 import com.slack.api.methods.request.emoji.EmojiListRequest
 import com.slack.api.methods.request.users.profile.UsersProfileSetRequest
 import com.slack.api.methods.response.emoji.EmojiListResponse
@@ -26,17 +25,12 @@ private[client] final case class Live(
        |Warning: $warning
        |""".stripMargin
 
-  def verifyFormattedEmoji(emoji: Emoji): Task[EmojiStripped] = {
-    val EmojiRegex = "^:([\\w-]+):$".r
-    val emojiRegexResult = emoji match {
-      case EmojiRegex(emojiStripped) => emojiStripped.asRight[Emoji]
-      case _                         => "Invalid formatted emoji was passed".asLeft[String]
+  def verifyFormattedEmoji(emoji: Emoji): Task[Unit] = {
+    val EmojiRegex = "^(:[\\w-]+:)$".r
+    emoji match {
+      case EmojiRegex(_) => ZIO.unit
+      case _             => ZIO.fail(SlackClientException("Invalid formatted emoji"))
     }
-
-    emojiRegexResult.fold(
-        error => ZIO.fail(SlackClientException(error))
-      , emojiStripped => ZIO.succeed(EmojiStripped(emojiStripped))
-    )
   }
 
   def retrieveEmojis: Task[EmojiListResponse] = {
@@ -48,16 +42,16 @@ private[client] final case class Live(
     ZIO.effect(methodsClient.emojiList(request))
   }
 
-  def verifyEmojiExists(emojiStripped: EmojiStripped)(response: EmojiListResponse): Task[Unit] =
-    if (response.getEmoji.containsKey(emojiStripped)) ZIO.unit
-    else ZIO.fail(SlackClientException("Emoji is not valid"))
-
-  def handleResponse[R <: SlackApiResponse, A](
-        response: R
-      , handler: R => Task[A]
-  ): Task[Task[A]] =
-    if (response.isOk) ZIO.succeed(handler(response))
-    else ZIO.fail(SlackClientException(textFailure(response.getError, response.getWarning)))
+//  def verifyEmojiExists(emojiStripped: EmojiStripped)(response: EmojiListResponse): Task[Unit] =
+//    if (response.getEmoji.containsKey(emojiStripped)) ZIO.unit
+//    else ZIO.fail(SlackClientException("Emoji is not valid"))
+//
+//  def handleResponse[R <: SlackApiResponse, A](
+//        response: R
+//      , handler: R => Task[A]
+//  ): Task[Task[A]] =
+//    if (response.isOk) ZIO.succeed(handler(response))
+//    else ZIO.fail(SlackClientException(textFailure(response.getError, response.getWarning)))
 
   def setStatusM(emoji: Emoji, text: String): Task[Response] = {
     val profile = new User.Profile()
@@ -80,17 +74,13 @@ private[client] final case class Live(
 
   def setStatus(emoji: Emoji, text: String): Task[Response] =
     for {
-      emojiStripped <- verifyFormattedEmoji(emoji)
-      emojiListResp <- retrieveEmojis
-      handleVerify  <- handleResponse(emojiListResp, verifyEmojiExists(emojiStripped))
-      _             <- handleVerify
-      response      <- setStatusM(emoji, text)
+      _        <- verifyFormattedEmoji(emoji)
+      response <- setStatusM(emoji, text)
     } yield response
 }
 
 private[client] object Live {
   type Emoji = String
-  final case class EmojiStripped(value: String) extends AnyVal
 
   val StatusCodeSuccess = 200
 
