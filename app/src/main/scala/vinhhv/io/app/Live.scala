@@ -7,7 +7,9 @@ import com.slack.api.bolt.request.builtin.SlashCommandRequest
 import com.slack.api.bolt.{ App, AppConfig }
 import vinhhv.io.Config.SitrepConfig
 import vinhhv.io.client.SlackMethodsClient
-import zio.{ Task, UIO, ZIO }
+import zio.{ RIO, ZIO }
+import zio.clock.Clock
+import zio.duration._
 
 private[app] final case class Live(
       sitrepConfig: SitrepConfig
@@ -21,20 +23,22 @@ private[app] final case class Live(
       .signingSecret(config.signingSecret)
       .build()
 
-  val handler: UIO[SlashCommandHandler] = ZIO.runtime.map {
+  val handler: RIO[Clock, SlashCommandHandler] = ZIO.runtime.map {
     rts => (req: SlashCommandRequest, ctx: SlashCommandContext) =>
       val (emoji, status) = Live.parse(req.getPayload.getText)
-      rts.unsafeRun(
+      rts.unsafeRunAsync(
           client
           .setStatus(emoji, status)
+          .delay(5.seconds)
           .foldM(
-              err => ZIO.effectTotal(ctx.ack(s":cry: Something went wrong: ${err.getMessage}"))
-            , res => ZIO.effectTotal(res)
+              err => ZIO.succeed(ctx.ack(s":cry: Something went wrong: ${err.getMessage}"))
+            , res => ZIO.succeed(res)
           )
-      )
+      )(_ => ())
+      rts.unsafeRun(ZIO.succeed(ctx.ack(s":joy: Scheduled!")))
   }
 
-  def start: Task[Unit] =
+  def start: RIO[Clock, Unit] =
     for {
       handler <- handler
       app = new App(appConfig).command(config.slashCommand, handler)
