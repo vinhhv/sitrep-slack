@@ -40,7 +40,7 @@ object Settings {
       , scalacOptions := stdOptions
       , logLevel := Level.Info
       , version := (version in ThisBuild).value
-      , scalafmtOnCompile := true
+      // , scalafmtOnCompile := true
       , wartremoverErrors in (Compile, compile) ++= warts
       , wartremoverErrors in (Test, compile) ++= warts
       , testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework"))
@@ -51,7 +51,7 @@ object Settings {
   }
 
   val appDependencies     = List(flyway) ++ http4s ++ slack ++ zioConfig
-  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe ++ slack
+  val serviceDependencies = List(logging, zioCats, zioMacros, zioTest, zioTestSbt) ++ circe ++ slack ++ scalatestAll
   val storageDependencies = List(quill, zio, zioCats)
 
   val higherKinds = addCompilerPlugin("org.typelevel" %% "kind-projector" % Version.kindProjector)
