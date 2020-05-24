@@ -1,10 +1,10 @@
 package vinhhv.io.app
 
+import com.slack.api.bolt.{ App, AppConfig }
 import com.slack.api.bolt.context.builtin.SlashCommandContext
 import com.slack.api.bolt.handler.builtin.SlashCommandHandler
 import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.request.builtin.SlashCommandRequest
-import com.slack.api.bolt.{ App, AppConfig }
 import vinhhv.io.Config.SitrepConfig
 import vinhhv.io.client.SlackMethodsClient
 import zio.{ RIO, ZIO }
@@ -27,15 +27,14 @@ private[app] final case class Live(
     rts => (req: SlashCommandRequest, ctx: SlashCommandContext) =>
       val (emoji, status) = Live.parse(req.getPayload.getText)
       rts.unsafeRun {
-        RIO.effectAsyncM[Clock, Unit] { _ =>
-          client
-            .setStatus(emoji, status)
-            .delay(5.seconds)
-            .foldM(
-                err => client.sendMessage(s":cry: Something went wrong: ${err.getMessage}")
-              , _ => ZIO.unit
-            )
-        } *> ZIO.succeed(ctx.ack(":joy: Scheduled!"))
+        client
+          .setStatus(emoji, status)
+          .delay(5.seconds)
+          .foldM(
+              err => client.sendMessage(s":cry: Something went wrong: ${err.getMessage}")
+            , _ => ZIO.unit
+          )
+          .forkDaemon *> ZIO.succeed { ctx.ack(":joy: Scheduled!") }
       }
   }
 
