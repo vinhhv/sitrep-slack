@@ -3,8 +3,10 @@ package vinhhv.io.client
 import com.slack.api.app_backend.slash_commands.response.SlashCommandResponse
 import com.slack.api.bolt.response.Response
 import com.slack.api.methods.MethodsClient
+import com.slack.api.methods.request.chat.ChatPostMessageRequest
 import com.slack.api.methods.request.emoji.EmojiListRequest
 import com.slack.api.methods.request.users.profile.UsersProfileSetRequest
+import com.slack.api.methods.response.chat.ChatPostMessageResponse
 import com.slack.api.methods.response.emoji.EmojiListResponse
 import com.slack.api.methods.response.users.profile.UsersProfileSetResponse
 import com.slack.api.model.User
@@ -79,6 +81,22 @@ private[client] final case class Live(
       statusUpdate <- verifyFormattedEmoji(emoji, text)
       response     <- setStatusM(statusUpdate)
     } yield response
+
+  def sendMessage(message: String): Task[Unit] = {
+    val request =
+      ChatPostMessageRequest
+        .builder
+        .channel("user")
+        .text(message)
+        .build
+
+    ZIO
+      .effect(methodsClient.chatPostMessage(request))
+      .flatMap { response: ChatPostMessageResponse =>
+        if (response.isOk) ZIO.unit
+        else ZIO.fail(SlackClientException(s"Failed to send message: $message"))
+      }
+  }
 }
 
 private[client] object Live {

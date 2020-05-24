@@ -26,16 +26,17 @@ private[app] final case class Live(
   val handler: RIO[Clock, SlashCommandHandler] = ZIO.runtime.map {
     rts => (req: SlashCommandRequest, ctx: SlashCommandContext) =>
       val (emoji, status) = Live.parse(req.getPayload.getText)
-      rts.unsafeRunAsync(
+      rts.unsafeRun {
+        RIO.effectAsyncM[Clock, Unit] { _ =>
           client
-          .setStatus(emoji, status)
-          .delay(5.seconds)
-          .foldM(
-              err => ZIO.succeed(ctx.ack(s":cry: Something went wrong: ${err.getMessage}"))
-            , res => ZIO.succeed(res)
-          )
-      )(_ => ())
-      rts.unsafeRun(ZIO.succeed(ctx.ack(s":joy: Scheduled!")))
+            .setStatus(emoji, status)
+            .delay(5.seconds)
+            .foldM(
+                err => client.sendMessage(s":cry: Something went wrong: ${err.getMessage}")
+              , _ => ZIO.unit
+            )
+        } *> ZIO.succeed(ctx.ack(":joy: Scheduled!"))
+      }
   }
 
   def start: RIO[Clock, Unit] =
