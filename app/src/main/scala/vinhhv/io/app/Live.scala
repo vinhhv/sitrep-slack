@@ -8,7 +8,9 @@ import com.slack.api.bolt.request.builtin.SlashCommandRequest
 import vinhhv.io.Config.SitrepConfig
 import vinhhv.io.client.SlackMethodsClient
 import zio.{ RIO, ZIO }
+import zio.{ console => ZConsole }
 import zio.clock.Clock
+import zio.console.Console
 import zio.duration._
 
 private[app] final case class Live(
@@ -23,22 +25,31 @@ private[app] final case class Live(
       .signingSecret(config.signingSecret)
       .build()
 
-  val handler: RIO[Clock, SlashCommandHandler] = ZIO.runtime.map {
+  private def sendMessage(message: String, channelId: String) =
+    client
+      .sendMessage(message, channelId)
+      .foldM(
+          err => ZConsole.putStrLn(err.getMessage)
+        , _ => ZIO.unit
+      )
+
+  val handler: RIO[Clock with Console, SlashCommandHandler] = ZIO.runtime.map {
     rts => (req: SlashCommandRequest, ctx: SlashCommandContext) =>
       val (emoji, status) = Live.parse(req.getPayload.getText)
+      val userId          = req.getPayload.getUserId
       rts.unsafeRun {
         client
           .setStatus(emoji, status)
           .delay(5.seconds)
           .foldM(
-              err => client.sendMessage(s":cry: Something went wrong: ${err.getMessage}")
-            , _ => ZIO.unit
+              err => sendMessage(s":cry: Could not set your status: \"$status\"", userId) *> ZIO.fail(err)
+            , _ => sendMessage(s":raised_hands: Successfully set your status: \"$status\"!", userId)
           )
-          .forkDaemon *> ZIO.succeed { ctx.ack(":joy: Scheduled!") }
+          .forkDaemon *> ZIO.succeed { ctx.ack(":alarm_clock: Scheduled!") }
       }
   }
 
-  def start: RIO[Clock, Unit] =
+  def start: RIO[Clock with Console, Unit] =
     for {
       handler <- handler
       app = new App(appConfig).command(config.slashCommand, handler)

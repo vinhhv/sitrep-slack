@@ -5,4 +5,5 @@ target/
 # Visual Studio Code
 .bloop/
 .metals/
+.vscode/
 project/metals.sbt

@@ -2,7 +2,7 @@ package vinhhv.io.client
 
 import com.slack.api.app_backend.slash_commands.response.SlashCommandResponse
 import com.slack.api.bolt.response.Response
-import com.slack.api.methods.MethodsClient
+import com.slack.api.methods.{ MethodsClient, SlackApiResponse }
 import com.slack.api.methods.request.chat.ChatPostMessageRequest
 import com.slack.api.methods.request.emoji.EmojiListRequest
 import com.slack.api.methods.request.users.profile.UsersProfileSetRequest
@@ -18,6 +18,7 @@ final case class SlackClientException(error: String) extends Exception(error)
 private[client] final case class Live(
       methodsClient: MethodsClient
     , userToken: String
+    , botToken: String
 ) extends SlackMethodsClient.Service {
   val textSuccess = "Status update was accepted! :middle_finger:"
 
@@ -82,19 +83,21 @@ private[client] final case class Live(
       response     <- setStatusM(statusUpdate)
     } yield response
 
-  def sendMessage(message: String): Task[Unit] = {
+  def sendMessage(message: String, channelId: String): Task[Unit] = {
     val request =
       ChatPostMessageRequest
         .builder
-        .channel("user")
+        .channel(channelId)
         .text(message)
+        .token(botToken)
+        .asUser(true)
         .build
 
     ZIO
       .effect(methodsClient.chatPostMessage(request))
       .flatMap { response: ChatPostMessageResponse =>
         if (response.isOk) ZIO.unit
-        else ZIO.fail(SlackClientException(s"Failed to send message: $message"))
+        else ZIO.fail(SlackClientException(createErrorMessage(response)))
       }
   }
 }
@@ -109,4 +112,12 @@ private[client] object Live {
 
   def createResponse(text: String): Response =
     Response.json(StatusCodeSuccess, SlashCommandResponse.builder.text(text).build)
+
+  def createErrorMessage(response: SlackApiResponse) =
+    s"""
+       |Failed to send message: ${response.getError}
+       |Needed: ${response.getNeeded}
+       |Provided: ${response.getProvided}
+       |Warning: ${response.getWarning}
+       |""".stripMargin
 }

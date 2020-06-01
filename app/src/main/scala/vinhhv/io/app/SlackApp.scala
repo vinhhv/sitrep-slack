@@ -6,13 +6,14 @@ import vinhhv.io.client.SlackMethodsClient.SlackMethodsClient
 import zio.macros.accessible
 import zio.{ Has, RIO, URLayer, ZLayer }
 import zio.clock.Clock
+import zio.console.Console
 
 @accessible
 object SlackApp {
   type SlackApp = Has[Service]
 
   trait Service {
-    def start: RIO[Clock, Unit]
+    def start: RIO[Clock with Console, Unit]
   }
 
   type LiveDeps = Has[SitrepConfig] with SlackMethodsClient

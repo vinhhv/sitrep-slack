@@ -12,13 +12,14 @@ object SlackMethodsClient {
 
   trait Service {
     def setStatus(emoji: String, status: String): Task[Response]
-    def sendMessage(message: String): Task[Unit]
+    def sendMessage(message: String, channelId: String): Task[Unit]
   }
 
   def live: URLayer[Has[SitrepConfig], SlackMethodsClient] =
     ZLayer.fromService[SitrepConfig, Service] { config =>
+      val botToken      = config.slackAppConfig.botToken
       val userToken     = config.slackAppConfig.userToken
       val methodsClient = Slack.getInstance.methods(userToken)
-      Live(methodsClient, userToken)
+      Live(methodsClient, userToken, botToken)
     }
 }
