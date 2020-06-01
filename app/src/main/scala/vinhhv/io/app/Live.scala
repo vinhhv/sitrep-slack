@@ -42,8 +42,8 @@ private[app] final case class Live(
           .setStatus(emoji, status)
           .delay(5.seconds)
           .foldM(
-              err => sendMessage(s":cry: Could not set your status: \"$status\"", userId) *> ZIO.fail(err)
-            , _ => sendMessage(s":raised_hands: Successfully set your status: \"$status\"!", userId)
+              err => sendMessage(s""":cry: Could not set your status: "$status"""", userId) *> ZIO.fail(err)
+            , _ => sendMessage(s""":raised_hands: Successfully set your status: "$status"!""", userId)
           )
           .forkDaemon *> ZIO.succeed { ctx.ack(":alarm_clock: Scheduled!") }
       }
