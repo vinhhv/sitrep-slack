@@ -1,0 +1,754 @@
+{
+  "type": "modal",
+  "title": {
+    "type": "plain_text",
+    "text": "Sitrep",
+    "emoji": true
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Schedule",
+    "emoji": true
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "What's your *sitrep*? Schedule a status update!"
+      },
+      "block_id": "status_input-block_id"
+    },
+    {
+      "type": "input",
+      "element": {
+        "type": "plain_text_input"
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Status (prepend emoji to add a status icon)\n\nex. \":taco: Eating tacos for lunch!\"",
+        "emoji": true
+      }
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "Pick a *date* and *time* to schedule your status:"
+      },
+      "accessory": {
+        "type": "datepicker",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a date",
+          "emoji": true
+        }
+      }
+    },
+    {
+      "type": "actions",
+      "elements": [
+        {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select the hour",
+            "emoji": true
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "12 AM",
+                "emoji": true
+              },
+              "value": "hour-0"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "01 AM",
+                "emoji": true
+              },
+              "value": "hour-1"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "02 AM",
+                "emoji": true
+              },
+              "value": "hour-2"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "03 AM",
+                "emoji": true
+              },
+              "value": "hour-3"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "04 AM",
+                "emoji": true
+              },
+              "value": "hour-4"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "05 AM",
+                "emoji": true
+              },
+              "value": "hour-5"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "06 AM",
+                "emoji": true
+              },
+              "value": "hour-6"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "07 AM",
+                "emoji": true
+              },
+              "value": "hour-7"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "08 AM",
+                "emoji": true
+              },
+              "value": "hour-8"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "09 AM",
+                "emoji": true
+              },
+              "value": "hour-9"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "10 AM",
+                "emoji": true
+              },
+              "value": "hour-10"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "11 AM",
+                "emoji": true
+              },
+              "value": "hour-11"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "12 PM",
+                "emoji": true
+              },
+              "value": "hour-12"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "01 PM",
+                "emoji": true
+              },
+              "value": "hour-13"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "02 PM",
+                "emoji": true
+              },
+              "value": "hour-14"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "03 PM",
+                "emoji": true
+              },
+              "value": "hour-15"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "04 PM",
+                "emoji": true
+              },
+              "value": "hour-16"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "05 PM",
+                "emoji": true
+              },
+              "value": "hour-17"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "06 PM",
+                "emoji": true
+              },
+              "value": "hour-18"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "07 PM",
+                "emoji": true
+              },
+              "value": "hour-19"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "08 PM",
+                "emoji": true
+              },
+              "value": "hour-20"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "09 PM",
+                "emoji": true
+              },
+              "value": "hour-21"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "10 PM",
+                "emoji": true
+              },
+              "value": "hour-22"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "11 PM",
+                "emoji": true
+              },
+              "value": "hour-23"
+            }
+          ]
+        },
+        {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Select the minute",
+            "emoji": true
+          },
+          "options": [
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "00",
+                "emoji": true
+              },
+              "value": "minute-0"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "01",
+                "emoji": true
+              },
+              "value": "minute-1"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "02",
+                "emoji": true
+              },
+              "value": "minute-2"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "03",
+                "emoji": true
+              },
+              "value": "minute-3"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "04",
+                "emoji": true
+              },
+              "value": "minute-4"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "05",
+                "emoji": true
+              },
+              "value": "minute-5"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "06",
+                "emoji": true
+              },
+              "value": "minute-6"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "07",
+                "emoji": true
+              },
+              "value": "minute-7"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "08",
+                "emoji": true
+              },
+              "value": "minute-8"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "09",
+                "emoji": true
+              },
+              "value": "minute-9"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "10",
+                "emoji": true
+              },
+              "value": "minute-10"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "11",
+                "emoji": true
+              },
+              "value": "minute-11"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "12",
+                "emoji": true
+              },
+              "value": "minute-12"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "13",
+                "emoji": true
+              },
+              "value": "minute-13"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "14",
+                "emoji": true
+              },
+              "value": "minute-14"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "15",
+                "emoji": true
+              },
+              "value": "minute-15"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "16",
+                "emoji": true
+              },
+              "value": "minute-16"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "17",
+                "emoji": true
+              },
+              "value": "minute-17"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "18",
+                "emoji": true
+              },
+              "value": "minute-18"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "19",
+                "emoji": true
+              },
+              "value": "minute-19"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "20",
+                "emoji": true
+              },
+              "value": "minute-20"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "21",
+                "emoji": true
+              },
+              "value": "minute-21"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "22",
+                "emoji": true
+              },
+              "value": "minute-22"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "23",
+                "emoji": true
+              },
+              "value": "minute-23"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "24",
+                "emoji": true
+              },
+              "value": "minute-24"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "25",
+                "emoji": true
+              },
+              "value": "minute-25"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "26",
+                "emoji": true
+              },
+              "value": "minute-26"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "27",
+                "emoji": true
+              },
+              "value": "minute-27"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "28",
+                "emoji": true
+              },
+              "value": "minute-28"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "29",
+                "emoji": true
+              },
+              "value": "minute-29"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "30",
+                "emoji": true
+              },
+              "value": "minute-30"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "31",
+                "emoji": true
+              },
+              "value": "minute-31"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "32",
+                "emoji": true
+              },
+              "value": "minute-32"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "33",
+                "emoji": true
+              },
+              "value": "minute-33"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "34",
+                "emoji": true
+              },
+              "value": "minute-34"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "35",
+                "emoji": true
+              },
+              "value": "minute-35"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "36",
+                "emoji": true
+              },
+              "value": "minute-36"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "37",
+                "emoji": true
+              },
+              "value": "minute-37"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "38",
+                "emoji": true
+              },
+              "value": "minute-38"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "39",
+                "emoji": true
+              },
+              "value": "minute-39"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "40",
+                "emoji": true
+              },
+              "value": "minute-40"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "41",
+                "emoji": true
+              },
+              "value": "minute-41"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "42",
+                "emoji": true
+              },
+              "value": "minute-42"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "43",
+                "emoji": true
+              },
+              "value": "minute-43"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "44",
+                "emoji": true
+              },
+              "value": "minute-4"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "45",
+                "emoji": true
+              },
+              "value": "minute-45"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "46",
+                "emoji": true
+              },
+              "value": "minute-46"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "47",
+                "emoji": true
+              },
+              "value": "minute-47"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "48",
+                "emoji": true
+              },
+              "value": "minute-48"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "49",
+                "emoji": true
+              },
+              "value": "minute-49"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "50",
+                "emoji": true
+              },
+              "value": "minute-50"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "51",
+                "emoji": true
+              },
+              "value": "minute-51"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "52",
+                "emoji": true
+              },
+              "value": "minute-52"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "53",
+                "emoji": true
+              },
+              "value": "minute-53"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "54",
+                "emoji": true
+              },
+              "value": "minute-54"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "55",
+                "emoji": true
+              },
+              "value": "minute-55"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "56",
+                "emoji": true
+              },
+              "value": "minute-56"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "57",
+                "emoji": true
+              },
+              "value": "minute-57"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "58",
+                "emoji": true
+              },
+              "value": "minute-58"
+            },
+            {
+              "text": {
+                "type": "plain_text",
+                "text": "59",
+                "emoji": true
+              },
+              "value": "minute-59"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
