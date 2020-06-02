@@ -75,7 +75,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "01 AM",
+                "text": "1 AM",
                 "emoji": true
               },
               "value": "hour-1"
@@ -83,7 +83,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "02 AM",
+                "text": "2 AM",
                 "emoji": true
               },
               "value": "hour-2"
@@ -91,7 +91,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "03 AM",
+                "text": "3 AM",
                 "emoji": true
               },
               "value": "hour-3"
@@ -99,7 +99,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "04 AM",
+                "text": "4 AM",
                 "emoji": true
               },
               "value": "hour-4"
@@ -107,7 +107,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "05 AM",
+                "text": "5 AM",
                 "emoji": true
               },
               "value": "hour-5"
@@ -115,7 +115,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "06 AM",
+                "text": "6 AM",
                 "emoji": true
               },
               "value": "hour-6"
@@ -123,7 +123,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "07 AM",
+                "text": "7 AM",
                 "emoji": true
               },
               "value": "hour-7"
@@ -131,7 +131,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "08 AM",
+                "text": "8 AM",
                 "emoji": true
               },
               "value": "hour-8"
@@ -139,7 +139,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "09 AM",
+                "text": "9 AM",
                 "emoji": true
               },
               "value": "hour-9"
@@ -171,7 +171,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "01 PM",
+                "text": "1 PM",
                 "emoji": true
               },
               "value": "hour-13"
@@ -179,7 +179,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "02 PM",
+                "text": "2 PM",
                 "emoji": true
               },
               "value": "hour-14"
@@ -187,7 +187,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "03 PM",
+                "text": "3 PM",
                 "emoji": true
               },
               "value": "hour-15"
@@ -195,7 +195,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "04 PM",
+                "text": "4 PM",
                 "emoji": true
               },
               "value": "hour-16"
@@ -203,7 +203,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "05 PM",
+                "text": "5 PM",
                 "emoji": true
               },
               "value": "hour-17"
@@ -211,7 +211,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "06 PM",
+                "text": "6 PM",
                 "emoji": true
               },
               "value": "hour-18"
@@ -219,7 +219,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "07 PM",
+                "text": "7 PM",
                 "emoji": true
               },
               "value": "hour-19"
@@ -227,7 +227,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "08 PM",
+                "text": "8 PM",
                 "emoji": true
               },
               "value": "hour-20"
@@ -235,7 +235,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "09 PM",
+                "text": "9 PM",
                 "emoji": true
               },
               "value": "hour-21"
@@ -269,7 +269,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "00",
+                "text": "0",
                 "emoji": true
               },
               "value": "minute-0"
@@ -277,7 +277,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "01",
+                "text": "1",
                 "emoji": true
               },
               "value": "minute-1"
@@ -285,7 +285,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "02",
+                "text": "2",
                 "emoji": true
               },
               "value": "minute-2"
@@ -293,7 +293,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "03",
+                "text": "3",
                 "emoji": true
               },
               "value": "minute-3"
@@ -301,7 +301,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "04",
+                "text": "4",
                 "emoji": true
               },
               "value": "minute-4"
@@ -309,7 +309,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "05",
+                "text": "5",
                 "emoji": true
               },
               "value": "minute-5"
@@ -317,7 +317,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "06",
+                "text": "6",
                 "emoji": true
               },
               "value": "minute-6"
@@ -325,7 +325,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "07",
+                "text": "7",
                 "emoji": true
               },
               "value": "minute-7"
@@ -333,7 +333,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "08",
+                "text": "8",
                 "emoji": true
               },
               "value": "minute-8"
@@ -341,7 +341,7 @@
             {
               "text": {
                 "type": "plain_text",
-                "text": "09",
+                "text": "9",
                 "emoji": true
               },
               "value": "minute-9"
