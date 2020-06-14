@@ -6,6 +6,7 @@ object Config {
         path: String
       , port: Int
       , slashCommand: String
+      , shortcutCallbackId: String
       , botToken: String
       , userToken: String
       , clientId: String

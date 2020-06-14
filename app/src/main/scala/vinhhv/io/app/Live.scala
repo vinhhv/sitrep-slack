@@ -7,8 +7,7 @@ import com.slack.api.bolt.jetty.SlackAppServer
 import com.slack.api.bolt.request.builtin.SlashCommandRequest
 import vinhhv.io.Config.SitrepConfig
 import vinhhv.io.client.SlackMethodsClient
-import zio.{ RIO, ZIO }
-import zio.{ console => ZConsole }
+import zio.{ RIO, Task, ZIO, console => ZConsole }
 import zio.clock.Clock
 import zio.console.Console
 import zio.duration._
@@ -33,10 +32,11 @@ private[app] final case class Live(
         , _ => ZIO.unit
       )
 
-  val handler: RIO[Clock with Console, SlashCommandHandler] = ZIO.runtime.map {
+  val slashCommandHandler: RIO[Clock with Console, SlashCommandHandler] = ZIO.runtime.map {
     rts => (req: SlashCommandRequest, ctx: SlashCommandContext) =>
       val (emoji, status) = Live.parse(req.getPayload.getText)
-      val userId          = req.getPayload.getUserId
+//      val scheduledTimestamp = ???
+      val userId = req.getPayload.getUserId
       rts.unsafeRun {
         client
           .setStatus(emoji, status)
@@ -49,10 +49,15 @@ private[app] final case class Live(
       }
   }
 
+  val shortcutHandler: Task[ShortcutHandler] = ZIO.runtime.map {}
+
   def start: RIO[Clock with Console, Unit] =
     for {
-      handler <- handler
-      app = new App(appConfig).command(config.slashCommand, handler)
+      slashCommandHandler <- slashCommandHandler
+      shortcutHanlder     <- shortcutHandler
+      app = new App(appConfig)
+        .command(config.slashCommand, slashCommandHandler)
+        .globalShortcut(config.shortcutCallbackId, shortcutHanlder)
     } yield new SlackAppServer(app, config.path, config.port).start()
 }
 
