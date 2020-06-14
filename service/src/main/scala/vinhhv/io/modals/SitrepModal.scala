@@ -15,24 +15,19 @@ import scala.jdk.CollectionConverters._
 object SitrepModal {
   val Sitrep = "sitrep"
 
-  val CloseText  = "close_text"
-  val PlainText  = "plain_text"
-  val SubmitText = "schedule"
+  val PlainText = "plain_text"
+
+  val CloseText  = "Close"
+  val SubmitText = "Schedule"
 
   val SitrepTitleId                       = "sitrep_title"
   val SitrepTitleText: MarkdownTextObject = markdownText("What's your *sitrep*? Schedule a status update!")
 
   val SitrepInputId = "status_input"
-  val SitrepInput: PlainTextInputElement = plainTextInput(
-      _.placeholder(plainText("ex. \":taco: Eating tacos for lunch!\"", true))
-  )
-  val SitrepInputText: PlainTextObject = plainText(
-      """Status (prepend emoji to add a status icon)
-        |
-        |ex. \":taco: Eating tacos for lunch!\"
-        |""".stripMargin
-    , true
-  )
+  val SitrepInput: PlainTextInputElement =
+    plainTextInput(_.placeholder(plainText(":taco: Eating tacos for lunch!", true)))
+
+  val SitrepInputText: PlainTextObject = plainText("Status (prepend emoji to add a status icon)", true)
 
   val SitrepDatepickerText: MarkdownTextObject       = markdownText("Pick a *date* and *time* to schedule your status:")
   val SitrepDatepickerPlaceholder: DatePickerElement = datePicker(_.placeholder(plainText("Select a date", true)))
@@ -44,16 +39,16 @@ object SitrepModal {
   val optionsHourAM: Seq[OptionObject] =
     hours
       .zipWithIndex
-      .map(hour => option(plainText(s"${hour._1.toString} AM", true), s"hour-${hour._2}"))
+      .map(hour => option(plainText(s"${hour._1.toString} AM", true), s"hour-${hour._2.toString}"))
   val optionsHourPM: Seq[OptionObject] =
     hours
       .zipWithIndex
-      .map(hour => option(plainText(s"${hour._1.toString} PM", true), s"hour-${hour._2 + 12}"))
+      .map(hour => option(plainText(s"${hour._1.toString} PM", true), s"hour-${(hour._2 + 12).toString}"))
   val optionsHours: util.List[OptionObject] = (optionsHourAM ++ optionsHourPM).asJava
 
   val optionsMinutes: util.List[OptionObject] =
     (0 until 60)
-      .map(minute => option(plainText(minute.toString, true), s"minute-$minute"))
+      .map(minute => option(plainText(minute.toString, true), s"minute-${minute.toString}"))
       .asJava
 
   def buildView(shortcutCallbackId: String): View =
